@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Backroomed nerd</title>
+    <style>
+        #gameImage {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HTML: Game content -->
+
+    <h2 id="roomTitle">Room Title</h2>
+    <img id="gameImage" src="" alt="Room Image">
+    <p id="roomDescription">Room Description</p>
+
+    <!-- User input -->
+    <input type="text" id="userInput" placeholder="Type your command">
+    <button onclick="processCommand()">Go</button>
+
+    <!-- JavaScript: Game logic -->
+
+    <script>
+        // Game rooms
+        var rooms = {
+            'Level 0': {
+                'title': 'Level 0',
+                'description': 'The mono-yellow wallpaper, old moist carpet, scattered electrical outlets, and inconsistently-placed fluorescent lighting. There are continuist halls, one to the left and right.',
+                'image': 'mainroom.jpg',
+                'directions': {
+                    'left': 'level 1',
+                    'right': 'level -1'
+                }
+            },
+            'level 1': {
+                'title': 'Level 1',
+                'description': 'A typical warehouse, with fluorescent lights hanging from the ceiling, occasional machinery such as forklifts and hallways and stairwells which peel off and lead to separate areas of the level.. There\'s a door to the right or you can go left to go back.',
+                'image': 'Level_1.jpg',
+                'directions': {
+                    'left': 'Level 0',
+                    'right': 'level 2'
+                }
+            },
+            'level -1': {
+                'title': 'Level -1',
+                'description': 'A long hallway made of concrete walls and old, carpeted flooring. The color of the wallpaper will shift in appearance as one traverses the level. The hallways contain various wooden doors on either side. There\'s a door to the right or you can go left to go back.',
+                'image': '-1.jpg',
+                'directions': {
+                    'left': 'Level 0',
+                    'right': 'level -2'
+                }
+            },
+            'level 2': {
+                'title': 'Level 2',
+                'description': 'A dim concrete maintenance hallways with steam pipes lining the walls and ceilings. Doors are rarely found; they house metal shelves and ventilation ducts. There are continuist halls, one to the left and one to the right.',
+                'image': 'mainroom.jpg',
+                'directions': {
+                    'left': 'level 1',
+                    'right': 'level 3',
+                }
+            },
+            'level -2': {
+                'title': 'Level -2',
+                'description': 'a metal ceiling and tan walls, although some areas have been found with wooden walls. Lights and pipes can be found around.',
+                'image': 'Level_-2.jpg',
+                'directions': {
+                    'left': 'Level -1',
+                    'right': 'level -3'
+                }
+            },
+            'level -3': {
+                'title': 'Level -3',
+                'description': ' an infinite labyrinth of crystal clear mirrors, concrete flooring, and lights that randomly flicker. Additionally, the fluorescent lights are known to produce a quiet hum-buzz that increases and decreases its volume at random.',
+                'image': 'Level_-3.jpg',
+                'directions': {
+                    'left': 'Level -1',
+                    'right': 'level -4'
+                }
+            },
+            'level 3': {
+                'title': 'Level 3',
+                'description':'an expansive complex of attenuated brick hallways with electrical machinery scattered throughout.',
+                'image': 'Level_3.jpg',
+                'directions': {
+                    'left': 'Level 1',
+                    'right': 'level 4'
+                }
+            },
+            'level -4': {
+                'title': 'Level -4',
+                'description': 'a metal ceiling and tan walls, although some areas have been found with wooden walls. Lights and pipes can be found around.',
+                'image': 'Level_-2.jpg',
+                'directions': {
+                    'left': 'Level -1',
+                    'right': 'level -5'
+                }
+            },
+        };
+
+        var currentRoom = 'start'; // Starting room
+        updateRoom();
+
+        function processCommand() {
+            var command = document.getElementById('userInput').value.toLowerCase();
+            var directions = rooms[currentRoom].directions;
+
+            if (directions[command]) {
+                currentRoom = directions[command];
+                updateRoom();
+            } else {
+                alert('You cannot go that way.');
+            }
+
+            document.getElementById('userInput').value = ''; // Clear input field
+        }
+
+        function updateRoom() {
+            var room = rooms[currentRoom];
+            document.getElementById('roomTitle').innerText = room.title;
+            document.getElementById('roomDescription').innerText = room.description;
+            document.getElementById('gameImage').src = room.image;
+        }
+    </script>
+
+</body>
+</html>
